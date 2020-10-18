@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 dotenv.config();
 
 type Config = {
@@ -10,9 +10,9 @@ type Config = {
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const config: Config = {
-  port: parseInt(process.env.PORT),
-  mongoDbUrl: process.env.MONGODB_URI,
-  jwtSecret: process.env.JWT_SECRET,
+  port: parseInt(process.env.PORT as string),
+  mongoDbUrl: process.env.MONGODB_URI as string,
+  jwtSecret: process.env.JWT_SECRET as string,
 };
 
 export default config;

@@ -1,5 +1,5 @@
 import { dbStart } from './mongo';
-import * as express from 'express';
+import express from 'express';
 import config from './config';
 import router from './router';
 import Controller from './controller';

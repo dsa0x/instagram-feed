@@ -1,14 +1,14 @@
 import AutoModel, { ModelManager } from './model';
 import { RequestHandler, Request, Response, NextFunction } from 'express';
-import userInstagram from 'user-instagram';
+import * as userInstagram from 'user-instagram';
 
-const userInstagram = require('user-instagram');
+// const userInstagram = require('user-instagram');
 
 export default class Controller {
   static async getAutoOrders() {
     try {
       const orders = await ModelManager.getAutoOrders();
-      const results = [];
+      const results: Array<any> = [];
       for (const user of orders) {
         results.push(userInstagram(user.username));
       }

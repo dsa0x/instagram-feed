@@ -42,7 +42,7 @@ export class ModelManager {
     return users;
   }
 
-  public static async update(post): Promise<any> {
+  public static async update(post: any): Promise<any> {
     try {
       const user = await AutoModel.updateOne(
         { username: post.username },
