@@ -1,6 +1,6 @@
 import AutoModel, { ModelManager } from './model';
 import { RequestHandler, Request, Response, NextFunction } from 'express';
-import * as userInstagram from 'user-instagram';
+import userInstagram from 'user-instagram';
 
 // const userInstagram = require('user-instagram');
 
