@@ -20,7 +20,7 @@ FROM node:12.13.0-alpine
 WORKDIR /app
 ENV NODE_ENV=production
 ENV MONGODB_URI=mongodb+srv://daredev:Laykay66%40!@cluster0-8liuy.mongodb.net/esocialpanel?retryWrites=true&w=majority
-ENV PORT=3003
+ENV PORT=3004
 
 COPY package*.json ./
 RUN npm ci --quiet --only=production
