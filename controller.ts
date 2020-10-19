@@ -10,7 +10,9 @@ export default class Controller {
       const orders = await ModelManager.getAutoOrders();
       const results: Array<any> = [];
       for (const user of orders) {
-        results.push(userInstagram(user.username));
+        if (user && user?.username) {
+          results.push(userInstagram(user.username));
+        }
       }
       const ress = await Promise.all(results);
       const mapres = ress.map((result, idx) => {
@@ -21,19 +23,23 @@ export default class Controller {
           startCount: number;
           username: string;
         } = {} as any;
-        if (result.posts[0]) {
+        if (result?.posts[0]) {
           const posts = result.posts[0];
           post.url = posts?.url;
           post.lastPost = posts?.url;
           post.type = posts?.isVideo ? 'video' : 'image';
           post.startCount = posts?.likesCount;
-          post.username = orders[idx].username;
+          post.username = orders[idx]?.username;
         }
         return post;
       });
 
       for (const p of mapres) {
-        await ModelManager.update(p);
+        try {
+          await ModelManager.update(p);
+        } catch (error) {
+          console.log(error);
+        }
       }
       res.send(mapres);
     } catch (error) {

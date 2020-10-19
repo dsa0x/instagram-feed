@@ -38,8 +38,12 @@ export default AutoModel;
 
 export class ModelManager {
   public static async getAutoOrders(): Promise<any> {
-    const users = await AutoModel.find();
-    return users;
+    try {
+      const users = await AutoModel.find();
+      return users;
+    } catch (error) {
+      throw new Error(`error occurred: ${error}`);
+    }
   }
 
   public static async update(post: any): Promise<any> {
