@@ -5,7 +5,7 @@ import userInstagram from 'user-instagram';
 // const userInstagram = require('user-instagram');
 
 export default class Controller {
-  static async getAutoOrders() {
+  static async getAutoOrders(req: Request, res: Response, next) {
     try {
       const orders = await ModelManager.getAutoOrders();
       const results: Array<any> = [];
@@ -13,7 +13,7 @@ export default class Controller {
         results.push(userInstagram(user.username));
       }
       const ress = await Promise.all(results);
-      const mapres = ress.map((res, idx) => {
+      const mapres = ress.map((result, idx) => {
         const post: {
           url: string;
           lastPost: string;
@@ -21,8 +21,8 @@ export default class Controller {
           startCount: number;
           username: string;
         } = {} as any;
-        if (res.posts[0]) {
-          const posts = res.posts[0];
+        if (result.posts[0]) {
+          const posts = result.posts[0];
           post.url = posts?.url;
           post.lastPost = posts?.url;
           post.type = posts?.isVideo ? 'video' : 'image';
@@ -35,6 +35,7 @@ export default class Controller {
       for (const p of mapres) {
         await ModelManager.update(p);
       }
+      res.send(mapres);
     } catch (error) {
       console.log(error);
     }

@@ -48,7 +48,7 @@ export class ModelManager {
         { username: post.username },
         {
           ...post,
-          $addToSet: { recentPosts: post.url },
+          // $addToSet: { recentPosts: post.url },
         }
       ); //.lean().exec()
       return user;
